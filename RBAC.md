@@ -1,17 +1,37 @@
 ### Accounts RBAC
 
-| Resource Type | Action  | IT Admin | Jr Manager | Sr Manager | User      | CFO  |
-|--------------|---------|----------|------------|------------|-----------|------|
-| **Account**  | Create  | ✅        | ✅          | ✅          | ❌        | ✅    |
-|              | Update  | ✅        | ✅          | ✅          | ✅ (own)  | ✅    |
-|              | Suspend | ✅        | ❌          | ✅          | ❌        | ✅    |
-|              | Delete  | ✅        | ❌          | ✅          | ❌        | ✅    |
+| Action  | IT Admin | Jr Manager | Sr Manager | User      | Admin | CFO  |
+|---------|----------|------------|------------|-----------|-------|------|
+| Create  | ✅        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| Update  | ✅        | ✅          | ✅          | ✅    | ✅    | ✅    |
+| Suspend | ✅        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| Delete  | ✅        | ✅          | ✅          | ❌        | ✅    | ✅    |
 
-# RBAC Matrix for Investments
 
-| Resource Type  | Action  | IT Admin | Jr Manager | Sr Manager | User (Regular) | CFO  |
-|---------------|---------|----------|------------|------------|---------------|------|
-| **Investment** | Create  | ❌        | ✅ (≤ $100K, Assigned Regions) | ✅ (≤ $1M, Assigned Regions) | ❌             | ✅    |
-|               | Update  | ❌        | ✅ (≤ $100K, Assigned Regions) | ✅ (≤ $1M, Assigned Regions) | ❌             | ✅    |
-|               | View    | ❌        | ✅ (Only Assigned Region) | ✅ (Only Assigned Region) | ✅ (Own Only)  | ✅    |
-|               | Approve | ❌        | ✅ (Only Assigned Region, Requires 2FA) | ✅ (Only Assigned Region, Requires 2FA) | ❌             | ✅    |
+### Accounts ABAC
+
+| Action  | IT Admin | Jr Manager | Sr Manager | User      | Admin | CFO  |
+|---------|----------|------------|------------|-----------|-------|------|
+| Create  | ✅        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| Update  | ✅        | ✅          | ✅          | Only own    | Only own    | ✅    |
+| Suspend | ✅        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| Delete  | ✅        | ✅          | ✅          | ❌        | Only own    | ✅    |
+
+### Investments RBAC
+
+| Action  | IT Admin | Jr Manager | Sr Manager | User      | Admin | CFO  |
+|---------|----------|------------|------------|-----------|-------|------|
+| Create  | ❌        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| Update  | ❌        | ✅          | ✅          | ❌    | ❌    | ✅    |
+| Approve | ❌        | ✅          | ✅          | ❌        | ❌    | ✅    |
+| View | ❌        | ❌          | ❌          | ✅        | ✅    | ✅    |
+
+### Investments ABAC
+
+| Action  | IT Admin | Jr Manager | Sr Manager | User      | Admin | CFO  |
+|---------|----------|------------|------------|-----------|-------|------|
+| Create  | ❌        | <= 100k, Region, 2FA (Optional)          | <= 1M, Region, 2FA (Optional)          | ❌        | ❌    | 2FA (Optional)    |
+| Update  | ❌        | <= 100k, Region, 2FA (Optional)          | <= 1M, Region, 2FA (Optional)          | ❌    | ❌    | 2FA (Optional)    |
+| Approve | ❌        | <= 100k, Region, 2FA (Optional)          | <= 1M, Region, 2FA (Optional)          | ❌        | ❌    | 2FA (Optional)    |
+| View | ❌        | ❌          | ❌          | Own        | Own    | 2FA    |
+
